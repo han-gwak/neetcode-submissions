@@ -1,0 +1,32 @@
+class Solution {
+    public int calPoints(String[] operations) {
+        int score = 0, prevScore = 0;
+        List<Integer> scores = new LinkedList<>();
+        for (int i = 0; i < operations.length; i++) {
+
+            if (operations[i].charAt(0) == '+') {
+                if (scores.size() > 1) {
+                    scores.add(scores.get(scores.size() - 2) + scores.get(scores.size() - 1));
+                }
+            } else if (operations[i].charAt(0) == 'D') {
+                if (scores.size() > 0) {
+                    scores.add(scores.get(scores.size() - 1) * 2);
+                }
+            } else if (operations[i].charAt(0) == 'C') {
+                if (scores.size() > 0) {
+                    scores.remove(scores.size() - 1);
+                }
+            } else {
+                scores.add(Integer.parseInt(operations[i]));
+            }
+        }
+
+        int total = 0;
+        for (Integer sc : scores) {
+            System.out.println("Scores: " + sc);
+            total += sc;
+        }
+            
+        return total;
+    }
+}
